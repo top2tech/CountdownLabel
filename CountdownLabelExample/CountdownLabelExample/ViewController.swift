@@ -38,49 +38,49 @@ class ViewController: UIViewController {
         countdownLabelAnvil.start()
 
         countdownLabelBurn.setCountDownTime(60*60)
-        countdownLabelBurn.animationType = .Burn
+        countdownLabelBurn.animationType = .burn
         countdownLabelBurn.start()
         
         countdownLabelEvaporate.setCountDownTime(60*60)
-        countdownLabelEvaporate.animationType = .Evaporate
+        countdownLabelEvaporate.animationType = .evaporate
         countdownLabelEvaporate.start()
         
         countdownLabelFall.setCountDownTime(60*60)
-        countdownLabelFall.animationType = .Fall
+        countdownLabelFall.animationType = .fall
         countdownLabelFall.start()
         
         countdownLabelPixelate.setCountDownTime(60*60)
-        countdownLabelPixelate.animationType = .Pixelate
+        countdownLabelPixelate.animationType = .pixelate
         countdownLabelPixelate.start()
         
         countdownLabelScale.setCountDownTime(60*60)
-        countdownLabelScale.animationType = .Scale
+        countdownLabelScale.animationType = .scale
         countdownLabelScale.start()
         
         countdownLabelSparkle.setCountDownTime(60*60)
-        countdownLabelSparkle.animationType = .Sparkle
+        countdownLabelSparkle.animationType = .sparkle
         countdownLabelSparkle.start()
         
         // 2. style
         countdownLabel2.setCountDownTime(60*60)
-        countdownLabel2.animationType = .Evaporate
-        countdownLabel2.textColor = .orangeColor()
-        countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
+        countdownLabel2.animationType = .evaporate
+        countdownLabel2.textColor = .orange
+        countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize)
         countdownLabel2.start()
         
         // 3. get status
         countdownLabel3.setCountDownTime(30)
-        countdownLabel3.animationType = .Sparkle
+        countdownLabel3.animationType = .sparkle
         countdownLabel3.start()
         
         // 4. control countdown
         countdownLabel4.setCountDownTime(30)
-        countdownLabel4.animationType = .Pixelate
+        countdownLabel4.animationType = .pixelate
         countdownLabel4.start()
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(10)
-        countdownLabel5.animationType = .Pixelate
+        countdownLabel5.animationType = .pixelate
         countdownLabel5.countdownDelegate = self
         countdownLabel5.start() { [unowned self] in
             self.countdownLabel5.text = "timer finished."
@@ -88,56 +88,56 @@ class ViewController: UIViewController {
         
         // 6. control countdown
         countdownLabel6.setCountDownTime(30)
-        countdownLabel5.animationType = .Scale
-        countdownLabel6.then(10) { [unowned self] in
-            self.countdownLabel6.animationType = .Pixelate
-            self.countdownLabel6.textColor = .greenColor()
+        countdownLabel5.animationType = .scale
+        _ = countdownLabel6.then(10) { [unowned self] in
+            self.countdownLabel6.animationType = .pixelate
+            self.countdownLabel6.textColor = .green
         }
-        countdownLabel6.then(5) { [unowned self] in
-            self.countdownLabel6.animationType = .Sparkle
-            self.countdownLabel6.textColor = .yellowColor()
+        _ = countdownLabel6.then(5) { [unowned self] in
+            self.countdownLabel6.animationType = .sparkle
+            self.countdownLabel6.textColor = .yellow
         }
         countdownLabel6.start() {
-            self.countdownLabel6.textColor = .whiteColor()
+            self.countdownLabel6.textColor = .white
         }
        
         // 7. attributed text
         countdownLabel7.setCountDownTime(30)
-        countdownLabel7.animationType = .Anvil
+        countdownLabel7.animationType = .anvil
         countdownLabel7.timeFormat = "ss"
         countdownLabel7.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
-            attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
+            attributes: [NSForegroundColorAttributeName: UIColor.red])
         countdownLabel7.start() {
             self.countdownLabel7.text = "timer finished."
         }
     }
     
     // MARK: - countdownLabel3's IBAction
-    @IBAction func getTimerCounted(sender: UIButton) {
+    @IBAction func getTimerCounted(_ sender: UIButton) {
         alert("\(countdownLabel3.timeCounted)")
     }
     
-    @IBAction func getTimerRemain(sender: UIButton) {
+    @IBAction func getTimerRemain(_ sender: UIButton) {
         alert("\(countdownLabel3.timeRemaining)")
     }
     
     // MARK: - countdownLabel4's IBAction
-    @IBAction func controlStartStop(sender: UIButton) {
+    @IBAction func controlStartStop(_ sender: UIButton) {
         if countdownLabel4.isPaused {
             countdownLabel4.start()
-            sender.setTitle("pause", forState: .Normal)
+            sender.setTitle("pause", for: UIControlState())
         } else {
             countdownLabel4.pause()
-            sender.setTitle("start", forState: .Normal)
+            sender.setTitle("start", for: UIControlState())
         }
     }
     
-    @IBAction func minus(sender: UIButton) {
+    @IBAction func minus(_ sender: UIButton) {
         countdownLabel4.addTime(-2)
     }
     
-    @IBAction func plus(sender: UIButton) {
+    @IBAction func plus(_ sender: UIButton) {
         countdownLabel4.addTime(2)
     }
 }
@@ -147,7 +147,7 @@ extension ViewController: CountdownLabelDelegate {
         debugPrint("countdownFinished at delegate.")
     }
     
-    func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
+    func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
         debugPrint("time counted at delegate=\(timeCounted)")
         debugPrint("time remaining at delegate=\(timeRemaining)")
     }
@@ -155,10 +155,10 @@ extension ViewController: CountdownLabelDelegate {
 }
 
 extension ViewController {
-    func alert(title: String) {
-        let vc = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
-        vc.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(vc, animated: true, completion: nil)
+    func alert(_ title: String) {
+        let vc = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        vc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(vc, animated: true, completion: nil)
     }
 }
 
