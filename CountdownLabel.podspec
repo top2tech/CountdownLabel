@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   s.source_files = 'CountdownLabel/**/*.swift'
   s.requires_arc = true
   s.frameworks   = "UIKit"
+  s.dependency	 = 'LTMorphingLabel', '0.4.0'
 end
